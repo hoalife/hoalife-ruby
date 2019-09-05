@@ -4,7 +4,7 @@ module HOALife
   class Error < StandardError; end
 
   # HTTP Errors
-  class HTTPError < HOALife::Error
+  class HTTPError < Error
     attr_reader :status, :headers, :details
 
     def initialize(status, headers, details)

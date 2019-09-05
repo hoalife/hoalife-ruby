@@ -1,33 +1,33 @@
 # frozen_string_literal: true
 
-module HOALife
-  module Resources
-    # Automatically follow links to related resources
-    module HasNestedResources
-      extend HOALife::Concern
+# Automatically follow links to related resources
+module HOALife::Resources::HasNestedResources
+  extend HOALife::Concern
 
-      class_methods do
-        attr_reader :has_nested_resources
+  class_methods do
+    attr_reader :has_nested_resources
 
-        def has_nested(key)
-          @has_nested_resources ||= []
+    # rubocop:disable Naming/PredicateName
+    def has_nested(key)
+      @has_nested_resources ||= []
 
-          @has_nested_resources.push(key)
+      @has_nested_resources.push(key)
 
-          add_nested_resources_methods!(key)
-        end
+      add_nested_resources_methods!(key)
+    end
+    # rubocop:enable Naming/PredicateName
 
-        private
+    private
 
-        def add_nested_resources_methods!(key)
-          define_method key do
-            raw_value = @obj[key.to_s]
-            if raw_value.is_a?(Array)
-              raw_value.collect { |value| Resources::Collection.new(value['link']).all }.flatten
-            else
-              []
-            end
-          end
+    def add_nested_resources_methods!(key)
+      define_method key do
+        raw_value = @obj[key.to_s]
+        if raw_value.is_a?(Array)
+          raw_value.collect do |value|
+            Resources::Collection.new(value['link']).all
+          end.flatten
+        else
+          []
         end
       end
     end

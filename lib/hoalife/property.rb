@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
-module HOALife
-  class Property < Resource
-    self.base_path = '/properties'
-  end
+# :nodoc
+class HOALife::Property < HOALife::Resource
+  self.base_path = '/properties'
 end

@@ -1,20 +1,16 @@
 # frozen_string_literal: true
 
-module HOALife
-  module Client
-    # HTTP PUT requests
-    class Put < Base
-      private
+# HTTP PUT requests
+class HOALife::Client::Put < HOALife::Client::Base
+  private
 
-      def request!
-        Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
-          req = Net::HTTP::Put.new(uri, request_headers)
+  def request!
+    Net::HTTP.start(uri.host, uri.port, use_ssl: true) do |http|
+      req = Net::HTTP::Put.new(uri, request_headers)
 
-          req.body = @body
+      req.body = @body
 
-          http.request(req)
-        end
-      end
+      http.request(req)
     end
   end
 end

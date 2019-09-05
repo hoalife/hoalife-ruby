@@ -1,11 +1,10 @@
 # frozen_string_literal: true
 
-module HOALife
-  class Escalation < Resource
-    include Resources::HasNestedResources
+# :nodoc
+class HOALife::Escalation < HOALife::Resource
+  include HOALife::Resources::HasNestedResources
 
-    self.base_path = '/escalations'
+  self.base_path = '/escalations'
 
-    has_nested_resources :violations
-  end
+  has_nested_resources :violations
 end
