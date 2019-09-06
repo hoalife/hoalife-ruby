@@ -10,7 +10,12 @@ module HOALife
     def initialize(status, headers, details)
       @status  = status
       @headers = headers
-      @details = details
+
+      begin
+        @details = JSON.parse(details)
+      rescue JSON::ParserError, TypeError
+        @details = details
+      end
 
       super(status)
     end
