@@ -44,7 +44,8 @@ class HOALife::Resources::Collection
   end
 
   def order(col, dir = :asc)
-    self.class.new add_params_to_url!(order: col, order_dir: dir)
+    safe_dir = dir.to_s.downcase == 'desc' ? 'desc' : 'asc'
+    self.class.new add_params_to_url!(order: col, order_dir: safe_dir)
   end
 
   def total_pages
@@ -89,7 +90,8 @@ class HOALife::Resources::Collection
   def add_params_to_url!(new_params)
     uri = URI(@url)
     exisiting_params = Hash[URI.decode_www_form(uri.query || '')]
-    uri.query = URI.encode_www_form(exisiting_params.merge(new_params))
+    new_params.each { |k, v| exisiting_params[k.to_s] = v }
+    uri.query = URI.encode_www_form(exisiting_params)
 
     uri.to_s
   end

@@ -16,4 +16,14 @@ class HOALifeBaseTest < Minitest::Test
     blk.call
     $VERBOSE = prev
   end
+
+  # Ensure that something changes after
+  # acting code block is run
+  def assert_changes(act, val)
+    first_val = val.call
+
+    act.call
+
+    refute_equal first_val, val.call
+  end
 end
