@@ -27,7 +27,7 @@ module HOALife
   @api_base    = ENV.fetch('HOALIFE_API_BASE', 'https://api.hoalife.com/api')
   @api_version = ENV.fetch('HOALIFE_API_VERSION', '1').to_i
   @api_key     = ENV['HOALIFE_API_KEY']
-  @sleep_when_rate_limited = true
+  @sleep_when_rate_limited = 1.0
 
   class << self
     attr_accessor :api_key, :signing_secret, :api_base, :api_version,

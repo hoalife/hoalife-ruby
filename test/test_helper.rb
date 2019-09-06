@@ -2,6 +2,7 @@
 
 $LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'hoalife'
+require 'hoalife/error'
 
 require 'minitest/autorun'
 require 'webmock/minitest'

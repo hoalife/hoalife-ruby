@@ -7,7 +7,7 @@ module HOALife::Resources::Requestable
   rescue HOALife::RateLimitError => e
     raise e unless HOALife.sleep_when_rate_limited
 
-    sleep 1
+    sleep HOALife.sleep_when_rate_limited.to_f
     retry
   end
 end
