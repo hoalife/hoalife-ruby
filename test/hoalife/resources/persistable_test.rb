@@ -23,8 +23,9 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
 
     response_mock = Minitest::Mock.new
     response_mock.expect(:json, response_json)
+    url = HOALife.api_base + '/foo'
 
-    HOALife::Client::Post.stub(:new, response_mock, [HOALife.api_base + '/foo']) do
+    HOALife::Client::Post.stub(:new, response_mock, [url]) do
       instance.save
       refute_nil instance.id
     end
@@ -38,8 +39,9 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
 
     response_mock = Minitest::Mock.new
     response_mock.expect(:json, response_json)
+    url = HOALife.api_base + '/foo/3'
 
-    HOALife::Client::Put.stub(:new, response_mock, [HOALife.api_base + '/foo/3']) do
+    HOALife::Client::Put.stub(:new, response_mock, [url]) do
       instance.save
       assert_equal 'Bob', instance.name
     end
@@ -50,8 +52,9 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
 
     response_mock = Minitest::Mock.new
     response_mock.expect(:status, 202)
+    url = HOALife.api_base + '/foo/3'
 
-    HOALife::Client::Delete.stub(:new, response_mock, [HOALife.api_base + '/foo/3']) do
+    HOALife::Client::Delete.stub(:new, response_mock, [url]) do
       assert instance.destroy
     end
   end
@@ -61,8 +64,9 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
 
     response_mock = Minitest::Mock.new
     response_mock.expect(:status, 400)
+    url = HOALife.api_base + '/foo/3'
 
-    HOALife::Client::Delete.stub(:new, response_mock, [HOALife.api_base + '/foo/3']) do
+    HOALife::Client::Delete.stub(:new, response_mock, [url]) do
       refute instance.destroy
     end
   end
