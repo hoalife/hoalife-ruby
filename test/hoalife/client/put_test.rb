@@ -2,7 +2,7 @@
 
 require 'test_helper'
 
-class HOALife::Client::GetTest < HOALifeBaseTest
+class HOALife::Client::PutTest < HOALifeBaseTest
   def setup
     HOALife.config do |cfg|
       cfg.api_key = 'foo'
@@ -12,10 +12,12 @@ class HOALife::Client::GetTest < HOALifeBaseTest
 
   def test_request!
     url      = 'https://example.com/foo'
-    instance = HOALife::Client::Get.new(url)
+    body     = '{"foo": "bar"}'
+    instance = HOALife::Client::Put.new(url, body)
 
-    stub_request(:get, url).with(headers: instance.send(:request_headers))
-                           .to_return(status: 200)
+    stub_request(:put, url).with(
+      headers: instance.send(:request_headers), body: body
+    ).to_return(status: 200)
 
     assert_equal 200, instance.status
   end
