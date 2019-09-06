@@ -7,7 +7,7 @@ module HOALife::Resources::Persistable
 
   class_methods do
     def create(attrs = {})
-      new(attrs).save
+      new(attrs).tap(&:save)
     end
   end
 
