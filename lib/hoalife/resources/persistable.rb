@@ -3,6 +3,13 @@
 # Persist an object
 module HOALife::Resources::Persistable
   include HOALife::Resources::Requestable
+  extend HOALife::Concern
+
+  class_methods do
+    def create(attrs = {})
+      new(attrs).save
+    end
+  end
 
   def save
     self.errors = nil
@@ -34,7 +41,7 @@ module HOALife::Resources::Persistable
 
   def create!
     make_request! do
-      response = Client::Post.new(create_url, to_json)
+      response = HOALife::Client::Post.new(create_url, to_json)
 
       assign_updated_data!(response.json)
     end

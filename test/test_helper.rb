@@ -7,4 +7,12 @@ require 'minitest/autorun'
 require 'webmock/minitest'
 
 class HOALifeBaseTest < Minitest::Test
+  # Turn down the verbosity of warnings for a time
+  def sssshhh(&blk)
+    prev = $VERBOSE
+    $VERBOSE = nil
+
+    blk.call
+    $VERBOSE = prev
+  end
 end

@@ -22,7 +22,7 @@ class HOALife::Resource < OpenStruct
       begin
         klass = Object.const_get("HOALife::#{camelized}")
       rescue NameError
-        raise UndefinedResourceError,
+        raise HOALife::UndefinedResourceError,
               "HOALife::#{camelized} is not defined"
       end
 
@@ -33,10 +33,6 @@ class HOALife::Resource < OpenStruct
       @resource_collection ||= HOALife::Resources::Collection.new(
         HOALife.api_base + base_path
       )
-    end
-
-    def create(attrs = {})
-      new(attrs).save
     end
   end
 
