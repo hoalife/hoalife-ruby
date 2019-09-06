@@ -21,10 +21,10 @@ module HOALife::Resources::HasNestedResources
 
     def add_nested_resources_methods!(key)
       define_method key do
-        raw_value = @obj[key.to_s]
+        raw_value = super()
         if raw_value.is_a?(Array)
           raw_value.collect do |value|
-            Resources::Collection.new(value['link']).all
+            HOALife::Resources::Collection.new(value['link']).all
           end.flatten
         else
           []
