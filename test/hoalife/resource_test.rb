@@ -62,7 +62,7 @@ class HOALife::ResourceTest < HOALifeBaseTest
 
     result = {
       'data' => {
-        'attributes' => { :name => 'foo' },
+        'attributes' => { name: 'foo' },
         'relationships' => {}
       }
     }
@@ -77,7 +77,7 @@ class HOALife::ResourceTest < HOALifeBaseTest
 
     result = {
       'data' => {
-        'attributes' => { :name => 'foo' },
+        'attributes' => { name: 'foo' },
         'relationships' => {}
       }
     }
