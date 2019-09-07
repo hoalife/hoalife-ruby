@@ -6,3 +6,5 @@
 /pkg/
 /spec/reports/
 /tmp/
+/dev_test/
+.envrc

@@ -24,9 +24,11 @@ module HOALife::Resources::Persistable
   end
 
   def destroy
-    response = HOALife::Client::Delete.new(update_url)
+    make_request! do
+      response = HOALife::Client::Delete.new(update_url)
 
-    response.status == 202
+      response.status == 202
+    end
   end
 
   private
@@ -52,16 +54,6 @@ module HOALife::Resources::Persistable
   def update!
     make_request! do
       response = HOALife::Client::Put.new(update_url, to_json)
-
-      assign_updated_data!(response.json)
-    end
-  rescue HOALife::BadRequestError => e
-    assign_errors!(e)
-  end
-
-  def destroy!
-    make_request! do
-      response = HOALife::Client::Delete.new(update_url)
 
       assign_updated_data!(response.json)
     end

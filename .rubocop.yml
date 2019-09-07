@@ -1,5 +1,6 @@
 AllCops:
   Exclude:
+    - 'dev_test/**'
     - 'lib/hoalife/concern.rb' # copied from rails source
 
 Style/ClassAndModuleChildren:
