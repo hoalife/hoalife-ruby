@@ -14,13 +14,17 @@ module HOALife::Resources::Persistable
   def save
     self.errors = nil
 
-    if id.nil?
+    if !persisted?
       create!
     else
       update!
     end
 
     errors.nil?
+  end
+
+  def persisted?
+    !id.nil?
   end
 
   def destroy

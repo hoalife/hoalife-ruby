@@ -15,6 +15,10 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
     end
   end
 
+  def test_persisted?
+    refute @object.new.persisted?
+  end
+
   def test_save_successful_create_new_resource
     instance = @object.new(name: 'Bob')
     response_json = {
