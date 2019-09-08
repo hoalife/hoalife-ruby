@@ -2,7 +2,7 @@
 
 Pragmatic access to the HOALife REST API. [https://docs.hoalife.com](https://docs.hoalife.com).
 
-[![Gem Version](https://badge.fury.io/rb/hoalife.svg)](https://badge.fury.io/rb/hoalife)
+[![Gem Version](https://badge.fury.io/rb/hoalife.svg)](https://badge.fury.io/rb/hoalife) [![Build Status](https://travis-ci.com/hoalife/hoalife-ruby.svg?branch=master)](https://travis-ci.com/hoalife/hoalife-ruby)
 
 This library seamlessly handles pagination, CRUD actions, Rate Limiting, and Error handling for you.
 
