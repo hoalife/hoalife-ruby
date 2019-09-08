@@ -8,3 +8,5 @@
 /tmp/
 /dev_test/
 .envrc
+
+*.gem

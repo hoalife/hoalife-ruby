@@ -11,7 +11,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['daniel@prowestech.com']
 
   spec.summary       = 'Ruby API Client for the HOALife.com API'
-  spec.description   = 'Ruby API Client for the HOALife.com API'
+  spec.description   = 'Interface for the HOALife.com HTTP API.'
   spec.homepage      = 'https://docs.hoalife.com'
   spec.license       = 'MIT'
 
@@ -31,12 +31,12 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'zeitwerk', '~> 2.1'
 
   spec.add_development_dependency 'bundler', '~> 2.0'
-  spec.add_development_dependency 'listen'
+  spec.add_development_dependency 'listen', '~> 3.1'
   spec.add_development_dependency 'minitest', '~> 5.0'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rubocop', '~> 0.74'
-  spec.add_development_dependency 'webmock'
+  spec.add_development_dependency 'webmock', '~> 3.6'
 end
