@@ -24,10 +24,11 @@ require 'hoalife/error'
 
 # :nodoc
 module HOALife
-  @api_base    = ENV.fetch('HOALIFE_API_BASE', 'https://api.hoalife.com/api')
-  @api_version = ENV.fetch('HOALIFE_API_VERSION', '1').to_i
-  @api_key     = ENV['HOALIFE_API_KEY']
-  @sleep_when_rate_limited = 1.0
+  @api_base                = ENV.fetch('HOALIFE_API_BASE', 'https://api.hoalife.com/api')
+  @api_version             = ENV.fetch('HOALIFE_API_VERSION', '1').to_i
+  @api_key                 = ENV['HOALIFE_API_KEY']
+  @signing_secret          = ENV['HOALIFE_SIGNING_SECRET']
+  @sleep_when_rate_limited = 10.0
 
   class << self
     attr_accessor :api_key, :signing_secret, :api_base, :api_version,
