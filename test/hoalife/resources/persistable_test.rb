@@ -35,6 +35,39 @@ class HOALife::Resources::PersistableTest < HOALifeBaseTest
     end
   end
 
+  def test_update_when_not_persisted?
+    instance = @object.new
+
+    refute instance.update
+  end
+
+  def test_update_with_errors
+    instance = @object.new(errors: nil)
+
+    errors = { 'data' => { 'attributes' => { 'foo': 'is nil' } } }
+    request_blk = proc { raise HOALife::BadRequestError.new(200, nil, errors) }
+
+    instance.stub(:make_request!, request_blk) do
+      refute instance.update(foo: nil)
+    end
+  end
+
+  def test_update_success
+    instance = @object.new(id: 3)
+    response_json = {
+      'data' => { 'attributes' => { 'name' => 'Bob', 'id' => 3 } }
+    }
+
+    response_mock = Minitest::Mock.new
+    response_mock.expect(:json, response_json)
+    url = HOALife.api_base + '/foo/3'
+
+    HOALife::Client::Put.stub(:new, response_mock, [url]) do
+      assert instance.update(name: 'Bob')
+      assert_equal 'Bob', instance.name
+    end
+  end
+
   def test_save_successful_update_new_resource
     instance = @object.new(name: 'Ed', id: 3)
     response_json = {

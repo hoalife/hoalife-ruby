@@ -27,6 +27,16 @@ module HOALife::Resources::Persistable
     !id.nil?
   end
 
+  def update(attrs = {})
+    return false unless persisted?
+
+    attrs.each do |key, value|
+      send("#{key}=", value)
+    end
+
+    save
+  end
+
   def destroy
     make_request! do
       response = HOALife::Client::Delete.new(update_url)
