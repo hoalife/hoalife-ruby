@@ -3,8 +3,9 @@
 require 'zeitwerk'
 require 'hoal_inflector'
 
-loader = Zeitwerk::Loader.for_gem
+loader = Zeitwerk::Loader.new
 loader.inflector = HOALInflector.new
+loader.push_dir(File.join(__dir__))
 tests = "#{__dir__}/**/*_test.rb"
 loader.ignore(tests)
 # loader.log!
