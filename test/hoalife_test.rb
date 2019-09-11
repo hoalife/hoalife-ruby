@@ -21,13 +21,11 @@ class HOALifeTest < HOALifeBaseTest
         end
 
         HOALife.signing_secret = "bar#{i}"
-        puts "assigned foo#{i}, bar#{i}"
 
         sleep rand
 
         assert_equal "foo#{i}", HOALife.api_key
         assert_equal "bar#{i}", HOALife.signing_secret
-        puts "asserted foo#{i}, bar#{i}"
       end
     end
 
