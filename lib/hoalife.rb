@@ -25,16 +25,7 @@ require 'hoalife/error'
 
 # :nodoc
 module HOALife
-  @api_base                = ENV.fetch('HOALIFE_API_BASE', 'https://api.hoalife.com/api')
-  @api_version             = ENV.fetch('HOALIFE_API_VERSION', '1').to_i
-  @api_key                 = ENV['HOALIFE_API_KEY']
-  @signing_secret          = ENV['HOALIFE_SIGNING_SECRET']
-  @sleep_when_rate_limited = 10.0
-
   class << self
-    attr_accessor :api_key, :signing_secret, :api_base, :api_version,
-                  :sleep_when_rate_limited
-
     # Support configuring with a block
     # HOALife.config do |config|
     #  config.api_key = "foo"
@@ -44,5 +35,24 @@ module HOALife
     def config
       yield self
     end
+
+    def thread_local_var(key, default_value = nil)
+      Thread.current[key] = default_value
+
+      define_singleton_method(key) do
+        Thread.current[key]
+      end
+
+      define_singleton_method("#{key}=") do |value|
+        Thread.current[key] = value
+      end
+    end
   end
+
+  thread_local_var :api_key, ENV['HOALIFE_API_KEY']
+  thread_local_var :signing_secret, ENV['HOALIFE_SIGNING_SECRET']
+
+  thread_local_var :api_base, ENV.fetch('HOALIFE_API_BASE', 'https://api.hoalife.com/api')
+  thread_local_var :api_version, ENV.fetch('HOALIFE_API_VERSION', '1').to_i
+  thread_local_var :sleep_when_rate_limited, 10.0
 end
