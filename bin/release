@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+case ARGV[0]
+when 'major'
+  release_version = 'major'
+when 'minor'
+  release_version = 'minor'
+when 'pre'
+  release_version = 'pre'
+when /\d+\.\d+\.\d+$/
+  release_version = ARGV[0]
+else
+  release_version = 'patch'
+end
+
+version = `gem bump --no-commit --version #{release_version} --pretend | awk '{ print $4 }' | head -n 1`.strip
+
+system('bundle')
+
+system('git add lib/hoalife/version.rb')
+system('git add Gemfile.lock')
+
+system("git commit -m \"Bump HOALife to #{version}\"")
+
+system("git tag v#{version}")
+system("git push --tags")
+
+system("gem build hoalife")
+
+puts "OTP Code:"
+code = gets.strip
+system("gem push --otp #{code} --key hoalife_rubygems_api_key hoalife-#{version}.gem")
+
+system("rm hoalife-#{version}.gem")
