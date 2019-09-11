@@ -10,7 +10,7 @@ tests = "#{__dir__}/**/*_test.rb"
 loader.ignore(tests)
 # loader.log!
 
-if ENV['DEV']
+if ENV['HOALIFE_RUBY_DEV']
   require 'listen'
 
   loader.enable_reloading
