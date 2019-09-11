@@ -37,14 +37,16 @@ module HOALife
     end
 
     def thread_local_var(key, default_value = nil)
-      Thread.current[key] = default_value
+      current_key = "HOALIFE_RUBY_#{key}"
+
+      Thread.current[current_key] = default_value
 
       define_singleton_method(key) do
-        Thread.current[key]
+        Thread.current[current_key]
       end
 
       define_singleton_method("#{key}=") do |value|
-        Thread.current[key] = value
+        Thread.current[current_key] = value
       end
     end
   end
