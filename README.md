@@ -29,6 +29,8 @@ Or install it yourself as:
 Configure the client with your credentials in your code.
 
 ```ruby
+require 'hoalife'
+
 HOALife.config do |config|
   config.api_key                 = 'sk_YOURSUPERSECRETKEY'
   config.signing_secret          = 'ss_YOURSIGNINGSECRET'
@@ -42,7 +44,7 @@ HOALife.signing_secret          = 'ss_YOURSIGNINGSECRET'
 HOALife.sleep_when_rate_limited = 10.0 # Optional
 ```
 
-Alternatively, you can specify the `api_key`, and `signing_secret` with environmental variables.
+Alternatively, you can specify the `HOALIFE_API_KEY`, and `HOALIFE_SIGNING_SECRET` environmental variables to automatically configure the client.
 
 ```sh
 HOALIFE_API_KEY=sk_YOURSUPERSECRETKEY
@@ -50,6 +52,16 @@ HOALIFE_SIGNING_SECRET=ss_YOURSIGNINGSECRET
 
 echo $HOALIFE_API_KEY # => sk_YOURSUPERSECRETKEY
 echo $HOALIFE_SIGNING_SECRET # => ss_YOURSIGNINGSECRET
+```
+resulting in
+```ruby
+require 'hoalife'
+
+ENV['HOALIFE_API_KEY'] # => 'sk_YOURSUPERSECRETKEY'
+ENV['HOALIFE_SIGNING_SECRET'] # => 'ss_YOURSIGNINGSECRET'
+
+HOALife.api_key # => 'sk_YOURSUPERSECRETKEY'
+HOALife.signing_secret # => 'ss_YOURSIGNINGSECRET'
 ```
 
 ### Rate Limits
