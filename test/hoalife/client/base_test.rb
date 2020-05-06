@@ -53,7 +53,7 @@ module HOALife
     end
 
     def test_api_version
-      assert_equal "version=#{API_VERSION}", instance.send(:api_version)
+      assert_equal "application/vnd.api+json; version=#{API_VERSION}", instance.send(:api_version)
     end
 
     def test_authorization_header
