@@ -24,6 +24,7 @@ system('git add Gemfile.lock')
 system("git commit -m \"Bump HOALife to #{version}\"")
 
 system("git tag v#{version}")
+system("git push")
 system("git push --tags")
 
 system("gem build hoalife")
