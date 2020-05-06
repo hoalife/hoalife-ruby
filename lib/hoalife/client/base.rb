@@ -101,7 +101,7 @@ class HOALife::Client::Base
   def api_version
     return nil if HOALife.api_version.nil?
 
-    "version=#{HOALife.api_version}"
+    "application/vnd.api+json; version=#{HOALife.api_version}"
   end
 
   def authorization_header
