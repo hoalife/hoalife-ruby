@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    hoalife (0.1.4)
+    hoalife (0.1.5)
       zeitwerk (~> 2.1)
 
 GEM
