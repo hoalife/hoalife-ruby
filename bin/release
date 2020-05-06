@@ -14,7 +14,7 @@ else
   release_version = 'patch'
 end
 
-version = `gem bump --no-commit --version #{release_version} --pretend | awk '{ print $4 }' | head -n 1`.strip
+version = `gem bump --no-commit --version #{release_version} | awk '{ print $4 }' | head -n 1`.strip
 
 system('bundle')
 
