@@ -18,7 +18,7 @@ def assert(bool)
     print "\e[32m.\e[0m"
   else
     puts "\e[31m"
-    puts "FAILED"
+    puts 'FAILED'
     puts caller
     print "\e[0m"
   end
