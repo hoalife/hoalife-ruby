@@ -31,6 +31,6 @@ system('gem build hoalife')
 
 puts 'OTP Code:'
 code = gets.strip
-system("gem push --otp #{code} --key hoalife_rubygems_api_key hoalife-#{version}.gem")
+system("gem push --otp #{code} hoalife-#{version}.gem")
 
 system("rm hoalife-#{version}.gem")
