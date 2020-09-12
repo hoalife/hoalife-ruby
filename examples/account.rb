@@ -8,7 +8,7 @@ parent = HOALife::Account.where(organizational: true).first
 
 csv = CSV.read(File.expand_path('properties.csv', __dir__), headers: true)
 
-associations = csv.collect { |row| row["association_name"] }.uniq
+associations = csv.collect { |row| row['association_name'] }.uniq
 
 associations.each.with_index do |association, i|
   attrs = {

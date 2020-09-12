@@ -33,11 +33,11 @@ def create_account(name)
 end
 
 csv.each do |row|
-  association = find_or_create_account(row["association_name"])
+  association = find_or_create_account(row['association_name'])
 
   attrs = row.to_h.merge(
-    account_id: association.id, phone_numbers: row["phone_numbers"].split("|"),
-    emails: row["emails"].split("|"),
+    account_id: association.id, phone_numbers: row['phone_numbers'].split('|'),
+    emails: row['emails'].split('|')
   )
 
   property = HOALife::Property.create(attrs)
@@ -48,12 +48,12 @@ end
 refute_equal(original_size, HOALife::Property.reload.count)
 
 csv.each do |row|
-  find_by_external_id = HOALife::Property.where(external_id: row["external_id"])
+  find_by_external_id = HOALife::Property.where(external_id: row['external_id'])
   assert_equal 1, find_by_external_id.count
 
   found = find_by_external_id.first
 
-  new_external_id = row["external_id"] + "WithAChange"
+  new_external_id = row['external_id'] + 'WithAChange'
   found.external_id = new_external_id
   assert(found.save)
 
