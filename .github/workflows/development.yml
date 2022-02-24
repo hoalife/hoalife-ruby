@@ -42,4 +42,4 @@ jobs:
 
     - name: Run tests
       timeout-minutes: 5
-      run: ${{matrix.env}} rake test
+      run: ${{matrix.env}} bundle exec rake test
