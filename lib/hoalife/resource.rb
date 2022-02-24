@@ -6,7 +6,9 @@ require 'time'
 require 'forwardable'
 
 # :nodoc
-class HOALife::Resource < OpenStruct
+class HOALife::Resource
+  attr_reader :attrs
+
   class << self
     extend Forwardable
 
@@ -36,10 +38,12 @@ class HOALife::Resource < OpenStruct
     end
   end
 
-  def initialize(obj = {}, _relationships = {})
-    @obj = cast_attrs(obj)
+  def initialize(attrs = {}, _relationships = {})
+    @attrs = {}
 
-    super(obj)
+    cast_attrs(attrs.transform_keys(&:to_sym)).each do |k, v|
+      send("#{k}=".to_sym, v)
+    end
   end
 
   def as_json
@@ -50,7 +54,7 @@ class HOALife::Resource < OpenStruct
       }
     }
 
-    each_pair do |k, _v|
+    @attrs.each do |k, _v|
       h['data']['attributes'][k] = send(k)
     end
 
@@ -59,6 +63,26 @@ class HOALife::Resource < OpenStruct
 
   def to_json(*_args)
     JSON.generate as_json
+  end
+
+  def method_missing(method_name, *args, &blk)
+    if method_name.match(/\=$/)
+      @attrs[method_name.to_s.gsub(/\=$/, "").to_sym] = args.first
+    elsif @attrs[method_name]
+      @attrs[method_name]
+    else
+      super
+    end
+  end
+
+  def respond_to?(method_name, include_private = false)
+    !@attrs[method_name].nil? ||
+      method_name.match(/\=$/) ||
+      super
+  end
+
+  def ==(other)
+    @attrs == other.attrs
   end
 
   private

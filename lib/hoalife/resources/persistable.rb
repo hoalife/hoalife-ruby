@@ -5,10 +5,16 @@ module HOALife::Resources::Persistable
   include HOALife::Resources::Requestable
   extend HOALife::Concern
 
+  attr_accessor :errors
+
   class_methods do
     def create(attrs = {})
       new(attrs).tap(&:save)
     end
+  end
+
+  def id
+    attrs[:id]
   end
 
   def save
