@@ -52,7 +52,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  bundler (> 2)
+  bundler (> 2.3)
   hoalife!
   listen (~> 3.1)
   minitest (~> 5.0)
@@ -61,4 +61,4 @@ DEPENDENCIES
   webmock (~> 3.6)
 
 BUNDLED WITH
-   2.1.4
+   2.3.8
