@@ -4,7 +4,7 @@ require 'test_helper'
 
 class HOALife::Resources::HasNestedObjectTest < HOALifeBaseTest
   def setup
-    @object = Class.new(OpenStruct)
+    @object = Class.new(HOALife::Resource)
     @object.include(HOALife::Resources::HasNestedObject)
   end
 
