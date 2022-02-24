@@ -4,6 +4,9 @@
 class HOALife::Property < HOALife::Resource
   include HOALife::Resources::Persistable
 
+  as_array :emails
+  as_array :phone_numbers
+
   self.base_path = '/properties'
 
   def as_json

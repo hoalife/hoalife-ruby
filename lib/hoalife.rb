@@ -21,7 +21,8 @@ end
 
 loader.setup
 
-require 'hoalife/error'
+require "hoalife/error"
+require "hoalife/concerns/arrayable"
 
 # :nodoc
 module HOALife

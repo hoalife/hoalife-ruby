@@ -7,6 +7,8 @@ require 'forwardable'
 
 # :nodoc
 class HOALife::Resource
+  extend HOALife::Arrayable
+
   attr_reader :attrs
 
   class << self
@@ -68,7 +70,7 @@ class HOALife::Resource
   def method_missing(method_name, *args, &blk)
     if method_name.match(/\=$/)
       @attrs[method_name.to_s.gsub(/\=$/, "").to_sym] = args.first
-    elsif @attrs[method_name]
+    elsif @attrs.key?(method_name)
       @attrs[method_name]
     else
       super
@@ -76,7 +78,7 @@ class HOALife::Resource
   end
 
   def respond_to?(method_name, include_private = false)
-    !@attrs[method_name].nil? ||
+    !@attrs[method_name] ||
       method_name.match(/\=$/) ||
       super
   end
