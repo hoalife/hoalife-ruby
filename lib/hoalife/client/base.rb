@@ -24,14 +24,22 @@ class HOALife::Client::Base
     @response ||= validate_response!
   end
 
+  def uri
+    @uri ||= URI::HTTPS.build(host: base_uri.host, path: request_uri.path, query: request_uri.query)
+  end
+
   private
 
   def request!
     raise 'Not implemented'
   end
 
-  def uri
-    @uri ||= URI(@url)
+  def request_uri
+    @request_uri ||= URI(@url)
+  end
+
+  def base_uri
+    @base_uri ||= URI(HOALife.api_base)
   end
 
   def request_headers

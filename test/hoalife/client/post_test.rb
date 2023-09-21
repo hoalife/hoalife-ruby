@@ -5,6 +5,7 @@ require 'test_helper'
 class HOALife::Client::PostTest < HOALifeBaseTest
   def setup
     HOALife.config do |cfg|
+      cfg.api_base = 'https://example.com/foo'
       cfg.api_key = 'foo'
       cfg.signing_secret = nil
     end

@@ -18,6 +18,7 @@ module HOALife
 
     def setup
       HOALife.config do |c|
+        c.api_base       = "https://example.com/foo"
         c.api_key        = API_KEY
         c.signing_secret = SIGNING_SECRET
         c.api_version    = API_VERSION
@@ -190,6 +191,14 @@ module HOALife
       instance.stub(:request!, response) do
         assert_equal response, instance.response
       end
+    end
+
+    def test_uri_with_url
+      assert_equal 'https://example.com/foo?name=bar', HOALife::Client::Base.new('https://example.com/foo?name=bar').uri.to_s
+    end
+
+    def test_uri_with_path
+      assert_equal 'https://example.com/foo?name=bar', HOALife::Client::Base.new('/foo?name=bar').uri.to_s
     end
   end
 end
